@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('location');
             $table->text('description');
 
+            $table->string('facebook_account');
+            $table->string('linkedin_account');
+            $table->string('twitter_account');
+            $table->string('instagram_account');
+            $table->string('website');
+
             $table->timestamps();
         });
     }

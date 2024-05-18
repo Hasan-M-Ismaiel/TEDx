@@ -36,5 +36,4 @@ class Event extends Model
         return $this->belongsToMany(Register::class);
     }
 
-
 }
