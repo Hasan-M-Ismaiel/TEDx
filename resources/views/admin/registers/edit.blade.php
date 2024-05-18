@@ -175,7 +175,7 @@
                                                             <select name="event_id" id="event_id" class="form-control">
                                                                 <option value="{{$register->events()->first()->id}}" selected>{{$register->events()->first()->title}}</option>
                                                                 @foreach ( $events as $event )
-                                                                @if ($currentEvent->title != $register->events()->first()->title)
+                                                                @if ($event->title != $register->events()->first()->title)
                                                                 <option value="{{$event->id}}">{{ $event->title }}</option>
                                                                 @endif
                                                                 @endforeach

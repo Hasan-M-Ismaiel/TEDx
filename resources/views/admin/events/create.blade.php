@@ -63,8 +63,8 @@
                                         <input type="textarea" name="description" id="description" placeholder="Event's description here"  value="{{ old('description') }}"/>
 
                                         <!--date-->
-                                        <label class="fieldlabels" for="deadline">Date: *</label>
-                                        <input id="deadline" type="date" placeholder="Event's date..." name="deadline"/>
+                                        <label class="fieldlabels" for="date">Date: *</label>
+                                        <input id="date" type="date" placeholder="Event's date..." name="date"/>
 
                                         <!--location-->
                                         <label class="fieldlabels" for="location">Location: *</label>
@@ -160,7 +160,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-11">
-                                                        <input type="text" class="form-control" name="twitter_account" id="twitter_account" aria-describedby="twitter_addon3" placeholder="add the website account">
+                                                        <input type="text" class="form-control" name="website" id="website" aria-describedby="website_addon3" placeholder="add the website account">
                                                     </div>
                                                 </div>
                                             </div>

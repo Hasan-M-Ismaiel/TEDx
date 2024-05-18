@@ -174,8 +174,8 @@
                                                             <label class="event_id" for="event_id"><strong>Event</strong></label>
                                                             <select name="event_id" id="event_id" class="form-control">
                                                                 <option value="{{$speaker->events()->first()->id}}" selected>{{$speaker->events()->first()->title}}</option>
-                                                                @foreach ( $events as $event )
-                                                                @if ($currentEvent->title != $speaker->events()->first()->title)
+                                                                @foreach ($events as $event )
+                                                                @if ($event->title != $speaker->events()->first()->title)
                                                                 <option value="{{$event->id}}">{{ $event->title }}</option>
                                                                 @endif
                                                                 @endforeach

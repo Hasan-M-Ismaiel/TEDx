@@ -173,7 +173,7 @@
                                                             <select name="event_id" id="event_id" class="form-control">
                                                                 <option value="{{$sponser->events()->first()->id}}" selected>{{$sponser->events()->first()->title}}</option>
                                                                 @foreach ( $events as $event )
-                                                                @if ($currentEvent->title != $sponser->events()->first()->title)
+                                                                @if ($event->title != $sponser->events()->first()->title)
                                                                 <option value="{{$event->id}}">{{ $event->title }}</option>
                                                                 @endif
                                                                 @endforeach

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             //this should be deleted because we will use many-to-many relationship
-            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('event_id')->constrained()->onDelete('cascade');
             
             $table->string('first_name');
             $table->string('last_name');
