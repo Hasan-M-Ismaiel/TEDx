@@ -20,13 +20,18 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
-            $table->string('about');
             $table->string('phone_number');
 
-            $table->string('facebook_account')->nullable();
-            $table->string('twitter_account')->nullable();
-            $table->string('instagram_account')->nullable();
-            $table->string('linkedin_account')->nullable();
+            $table->string('profession');
+            
+            $table->string('bio');
+
+            $table->string('talk_idea');
+
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedin')->nullable();
 
             $table->string('website')->nullable();
 

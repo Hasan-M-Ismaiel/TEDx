@@ -14,15 +14,18 @@ return new class extends Migration
         Schema::create('volunteers', function (Blueprint $table) {
             $table->id();
 
-            //this should be deleted because we will use many-to-many relationship
-            // $table->foreignId('event_id')->constrained()->onDelete('cascade');
-
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
-            $table->string('cv');
-            $table->string('about');
             $table->string('phone_number');
+            
+            $table->string('bio');
+
+            $table->integer('age');
+            $table->string('t_shirt_size');
+            $table->string('question1');
+            $table->string('question2');
+            $table->string('question3');
 
             $table->timestamps();
         });

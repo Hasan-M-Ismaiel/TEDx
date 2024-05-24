@@ -1,4 +1,4 @@
-<header class="header header-sticky mb-4">
+<header class="header header-sticky">
     <div class="container-fluid">
 
         <!--side menu icon-->
@@ -61,7 +61,7 @@
                 <!--image-->
                 <a class="nav-link py-0 imageParentClass" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="tooltip" data-bs-placement="top" title="{{auth()->user()->name}}">
                     <div class="avatar avatar-md">
-                        <img class="avatar-img shadow mb-1" src="{{ asset('assets/images/admin___.png') }}" alt="" />
+                        <img class="avatar-img shadow mb-1" src="{{ asset('assets/images/TED.png') }}" alt="" />
                     </div>
                 </a>
             </li>

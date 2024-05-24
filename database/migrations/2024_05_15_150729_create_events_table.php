@@ -15,16 +15,18 @@ return new class extends Migration
             $table->id();
             
             $table->string('title');
-            $table->date('date');
-
-            $table->string('location');
             $table->text('description');
+            $table->date('date');
+            $table->string('location');
 
-            $table->string('facebook_account');
-            $table->string('linkedin_account');
-            $table->string('twitter_account');
-            $table->string('instagram_account');
-            $table->string('website');
+            
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('website')->nullable();
+            
+            $table->string('phone')->nullable();
 
             $table->timestamps();
         });

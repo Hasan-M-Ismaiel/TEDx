@@ -13,18 +13,27 @@ class Volunteer extends Model
         'first_name', 
         'last_name', 
         'email', 
-        'about', 
         'phone_number', 
-        'cv', 
-        'facebook_account', 
-        'twitter_account', 
-        'instagram_account',
-        'linkedin_account',
-        'website',
+        
+        'bio',
+        
+        'age',
+        't_shirt_size', 
+        'question1', 
+        'question2', 
+        'question3',
     ];
     
     public function events ()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    public function checkifAssignedToEvent(Event $event)
+    {
+        $numeberOfAssignedEvents = $this->events()
+                    ->where('events.id', $event->id)
+                    ->count();
+        return $numeberOfAssignedEvents > 0 ? true : false; 
     }
 }

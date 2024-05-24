@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterCreateRequest;
+use App\Http\Requests\RegisterUpdateRequest;
 use App\Models\Event;
 use App\Models\Register;
+use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -40,9 +43,14 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RegisterCreateRequest $request)
     {
-        //
+        $register = Register::create($request->validated());
+
+        $event = Event::findOrFail(request()->event_id);
+        $event->registers()->attach($register);
+
+        return redirect()->route('admin.registerCreated', ['register'=>$register]);
     }
 
     /**
@@ -65,26 +73,33 @@ class RegisterController extends Controller
         $currentEvent = $register->events()->first();
 
         return view('admin.registers.edit', [
-            'register' => $register,
-            'events' => $events,
-            'currentEvent' => $currentEvent,
-            'page' => 'Edit register'
+            'register'      => $register,
+            'events'        => $events,
+            'currentEvent'  => $currentEvent,
+            'page'          => 'Edit register'
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RegisterUpdateRequest $request, Register $register)
     {
-        //
+        $register->update($request->validated());
+        return redirect()->route('admin.registerUpdated', ['register'=>$register]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Register $register)
     {
-        //
+        if($register->events()->count()>0){
+            $register->events()->detach();
+        }
+        
+        $oldRegister = $register->first_name;
+        $register->delete();
+        return redirect()->route('admin.registerDeleted', ['register'=>$oldRegister]);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VolunteerCreateRequest;
+use App\Http\Requests\VolunteerUpdateRequest;
 use App\Models\Event;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
@@ -40,9 +42,14 @@ class VolunteerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VolunteerCreateRequest $request)
     {
-        //
+        $volunteer = Volunteer::create($request->validated());
+
+        $event = Event::findOrFail(request()->event_id);
+        $event->volunteers()->attach($volunteer);
+
+        return redirect()->route('admin.volunteerCreated', ['volunteer'=>$volunteer]);
     }
 
     /**
@@ -65,26 +72,32 @@ class VolunteerController extends Controller
         $currentEvent = $volunteer->events()->first();
 
         return view('admin.volunteers.edit', [
-            'volunteer' => $volunteer,
-            'events' => $events,
-            'currentEvent' => $currentEvent,
-            'page' => 'Edit volunteer'
+            'volunteer'     => $volunteer,
+            'events'        => $events,
+            'currentEvent'  => $currentEvent,
+            'page'          => 'Edit volunteer'
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(VolunteerUpdateRequest $request, Volunteer $volunteer)
     {
-        //
+        $volunteer->update($request->validated());
+        return redirect()->route('admin.volunteerUpdated', ['volunteer'=>$volunteer]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Volunteer $volunteer)
     {
-        //
+        if($volunteer->events()->count()>0){
+            $volunteer->events()->detach();
+        }
+        $oldVolunteer = $volunteer->first_name;
+        $volunteer->delete();
+        return redirect()->route('admin.volunteerDeleted', ['volunteer'=>$oldVolunteer]);
     }
 }
