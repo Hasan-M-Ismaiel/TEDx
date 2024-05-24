@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="TEDxJumeirahBeachPark">
+    <meta name="description" content="TEDxJumeirahBeachPark, TED, TEDx, talk, event, conference, UAE, dubai, jumeirah, park">
     <meta name="author" content="eng.Hasan Ismaiel">
     <meta name="keyword" content="TED,TEDx,TEDxJumeirahBeachPark,Jumeirah,Beach,Park,conference">
-    <title>{{ config('app.name') }}</title>
-    <link rel="icon" type="image/png" href="{!! asset('assets/icons/tedxIcon.png') !!}" />
+    <title>TEDx JumierahBeachPark</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets_main/assets/icons/TED.png') }}" />
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
@@ -35,7 +35,7 @@
     <!--bootstrap 5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Vendors styles-->
     <link rel="stylesheet" href='{{ asset("css/vendors/simplebar.css") }}'>
     <link rel="stylesheet" href='{{ asset("vendors/simplebar/css/simplebar.css") }}'>
@@ -50,18 +50,25 @@
     <title>TEDxJumeirahBeachPark</title>
     @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/css/profile.css', 'resources/css/createProject.css', 'resources/sass/app.scss', 'resources/css/editProject.css', 'resources/css/radioButton.styl', 'resources/css/carddashboard.css','resources/css/notificationTemplate.css' ])
 
+    <!--this is for the dashboard bg imge-->
+    <style>
+        .main-img {
+            background: url('../../../assets/images/road.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body class="area">
     @include('partials.menu')
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         @include('partials.header')
-        <div class="body flex-grow-1 px-3">
-            <div class="container-lg ">
-                @yield('content')
-            </div>
-        </div>
 
+        @yield('content')
         <x-toast-notification />
         <x-loader />
 
@@ -70,6 +77,34 @@
             <div class="ms-auto">Powered by&nbsp;<a href="http://account.infinityfreeapp.com/index.php?i=2">Hasan Ismaiel</a></div>
         </footer>
     </div>
+
+    <!--for file pond-->
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script>
+        // Get a reference to the file input element
+        const inputElement = document.querySelector('input[id="image"]');
+
+        // Create a FilePond instance
+        const pond = FilePond.create(inputElement);
+
+        FilePond.setOptions({
+            server: {
+                url: '/admin/upload',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+
+            }
+        });
+    </script>
+
+    <!--get the logged in user id for the notifications-->
+    <script>
+        // user loged in id 
+        window.userID = {{ auth()->id() }};
+        // number of general notifications 
+        window.NumberOfNotifications = {!!auth()->user()->unreadNotifications->count() !!};
+    </script>
 </body>
 
 </html>

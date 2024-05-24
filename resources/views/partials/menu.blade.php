@@ -2,11 +2,11 @@
     <!-- brand name and logo-->
     <div class="sidebar-brand d-none d-md-flex">
             
-        <svg class="sidebar-brand-full" width="118" height="46" alt="TeamWork Logo">
-            <use xlink:href="{{ asset('assets/brand/TeamWorkOK.svg#full') }}"></use>
+        <svg class="sidebar-brand-full" width="118" height="46" alt="TED Logo">
+            <use xlink:href="{{ asset('assets/brand/TED_.svg#full') }}"></use>
         </svg>
-        <svg class="sidebar-brand-narrow" width="46" height="46" alt="TeamWork Logo">
-            <use xlink:href="{{ asset('assets/brand/TeamWorkcheckmark.svg#full') }}"></use>
+        <svg class="sidebar-brand-narrow" width="46" height="46" alt="TED Logo">
+            <use xlink:href="{{ asset('assets/brand/TED_sm.svg#full') }}"></use>
         </svg>
     </div>
 
@@ -43,7 +43,7 @@
         <li class="nav-item context mt-5">
             <a class="nav-link" href="{{ route('admin.events.index') }}">
                 <svg class="nav-icon">
-                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
+                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-bookmark') }}"></use>
                 </svg> 
                 Events
             </a>
@@ -53,7 +53,7 @@
         <li class="nav-item context1">
             <a class="nav-link" href="{{ route('admin.speakers.index') }}">
                 <svg class="nav-icon">
-                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-list-high-priority') }}"></use>
+                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-mic') }}"></use>
                 </svg> 
                 Speakers
             </a>
@@ -63,7 +63,7 @@
         <li class="nav-item context2">
             <a class="nav-link" href="{{ route('admin.sponsers.index') }}">
                 <svg class="nav-icon">
-                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
+                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-dollar') }}"></use>
                 </svg> 
                 Sponsers
             </a>
@@ -73,7 +73,7 @@
         <li class="nav-item context3">
             <a class="nav-link" href="{{ route('admin.registers.index') }}">
                 <svg class="nav-icon">
-                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-user-follow') }}"></use>
+                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-credit-card') }}"></use>
                 </svg> 
                 Registers
             </a>
@@ -83,7 +83,7 @@
         <li class="nav-item context4">
             <a class="nav-link" href="{{ route('admin.volunteers.index') }}">
                 <svg class="nav-icon">
-                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-money') }}"></use>
+                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-user-plus') }}"></use>
                 </svg> 
                 Volunteers
             </a>
@@ -93,7 +93,7 @@
         <li class="nav-item context6">
             <a class="nav-link" href="{{ route('admin.members.index') }}">
                 <svg class="nav-icon">
-                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-money') }}"></use>
+                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-group') }}"></use>
                 </svg> 
                 Members
             </a>

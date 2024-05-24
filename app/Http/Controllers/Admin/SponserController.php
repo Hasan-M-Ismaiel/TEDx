@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SponserCreateRequest;
+use App\Http\Requests\SponserUpdateRequest;
 use App\Models\Event;
 use App\Models\Sponser;
+use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 
 class SponserController extends Controller
@@ -40,9 +43,24 @@ class SponserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SponserCreateRequest $request)
     {
-        //
+        $sponser = Sponser::create($request->validated());
+
+        $event = Event::findOrFail(request()->event_id);
+        $event->sponsers()->attach($sponser);
+
+        //image to the event
+        $temporaryFile = TemporaryFile::where('folder', request()->image)->first();
+        if ($temporaryFile) {
+            $sponser->addMedia(storage_path('app/pictures/tmp/' . $temporaryFile->folder . '/' . $temporaryFile->filename))
+                ->toMediaCollection('sponsers');
+
+            rmdir(storage_path('app/pictures/tmp/' . $temporaryFile->folder));
+            $temporaryFile->delete();
+        }
+        
+        return redirect()->route('admin.sponserCreated', ['sponser'=>$sponser]);
     }
 
     /**
@@ -75,16 +93,37 @@ class SponserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SponserUpdateRequest $request, Sponser $sponser)
     {
-        //
+        $sponser->update($request->validated());
+
+        //updat image
+        if(request()->image){
+            $sponser->clearMediaCollection('sponsers'); 
+            $temporaryFile = TemporaryFile::where('folder', request()->image)->first();
+            if ($temporaryFile) {
+                $sponser->addMedia(storage_path('app/pictures/tmp/' . $temporaryFile->folder . '/' . $temporaryFile->filename))
+                    ->toMediaCollection('sponsers');
+    
+                rmdir(storage_path('app/pictures/tmp/' . $temporaryFile->folder));
+                $temporaryFile->delete();
+            }
+        }
+
+        return redirect()->route('admin.sponserUpdated', ['sponser'=>$sponser]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Sponser $sponser)
     {
-        //
+        if($sponser->events()->count()>0){
+            $sponser->events()->detach();
+        }
+        $oldSponser = $sponser->first_name;
+        $sponser->delete();
+        return redirect()->route('admin.sponserDeleted', ['sponser'=>$oldSponser]);
+    
     }
 }

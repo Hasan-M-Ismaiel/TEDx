@@ -18,7 +18,7 @@
                 <th scope="col" class="align-middle" id="pcreateProject">Date</th>
                 <th scope="col" class="align-middle" id="pcreateProject">Location</th>
                 <th scope="col" class="align-middle" id="pcreateProject" width="100px">Description</th>
-                <th scope="col" class="align-middle" id="pcreateProject">#Team members</th>
+                <th scope="col" class="align-middle" id="pcreateProject">#Members</th>
                 <th scope="col" class="align-middle" id="pcreateProject">#Sponsers</th>
                 <th scope="col" class="align-middle" id="pcreateProject">#Registers</th>
                 <th scope="col" class="align-middle" id="pcreateProject">#Speakers</th>
@@ -57,7 +57,7 @@
                     <!--# of team members-->
                     <td class="align-middle">
                         @if($event->members()->count() > 0)
-                            <span class="badge m-1" style="background: #673AB7;">{{  $event->members->count() }}</span>
+                            <span class="badge m-1" style="background: #41be70;">{{  $event->members->count() }}</span>
                             <br>
                             @foreach ($event->members as $member)
                                 <span class="badge m-1" style="background: #673AB7;">{{ $member->first_name }}</span>
@@ -70,7 +70,7 @@
                     <!--# of team sponsers-->
                     <td class="align-middle">
                         @if($event->sponsers()->count() > 0)
-                            <span class="badge m-1" style="background: #673AB7;">{{  $event->sponsers->count() }}</span>
+                            <span class="badge m-1" style="background: #41be70;">{{  $event->sponsers->count() }}</span>
                             <br>
                             @foreach ($event->sponsers as $sponser)
                                 <span class="badge m-1" style="background: #673AB7;">{{ $sponser->first_name }}</span>
@@ -83,7 +83,7 @@
                     <!--# of team registers-->
                     <td class="align-middle">
                         @if($event->registers()->count() > 0)
-                            <span class="badge m-1" style="background: #673AB7;">{{  $event->registers->count() }}</span>
+                            <span class="badge m-1" style="background: #41be70;">{{  $event->registers->count() }}</span>
                             <br>
                             @foreach ($event->registers as $register)
                                 <span class="badge m-1" style="background: #673AB7;">{{ $register->first_name }}</span>
@@ -96,7 +96,7 @@
                     <!--# of team speakers-->
                     <td class="align-middle">
                         @if($event->speakers()->count() > 0)
-                            <span class="badge m-1" style="background: #673AB7;">{{  $event->speakers->count() }}</span>
+                            <span class="badge m-1" style="background: #41be70;">{{  $event->speakers->count() }}</span>
                             <br>
                             @foreach ($event->speakers as $speaker)
                                 <span class="badge m-1" style="background: #673AB7;">{{ $speaker->first_name }}</span>
@@ -109,7 +109,7 @@
                     <!--# of team volunteers-->
                     <td class="align-middle">
                         @if($event->volunteers()->count() > 0)
-                            <span class="badge m-1" style="background: #673AB7;">{{  $event->volunteers->count() }}</span>
+                            <span class="badge m-1" style="background: #41be70;">{{  $event->volunteers->count() }}</span>
                             <br>
                             @foreach ($event->volunteers as $volunteer)
                                 <span class="badge m-1" style="background: #673AB7;">{{ $volunteer->first_name }}</span>

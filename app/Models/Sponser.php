@@ -4,22 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Sponser extends Model
+class Sponser extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'first_name', 
         'last_name', 
         'email', 
-        'about', 
         'phone_number', 
-        'logo', 
-        'facebook_account', 
-        'twitter_account', 
-        'instagram_account',
-        'linkedin_account',
+        'about', 
+
+        'facebook', 
+        'twitter', 
+        'instagram',
+        'linkedin',
+
         'website',
     ];
 
@@ -27,4 +30,13 @@ class Sponser extends Model
     {
         return $this->belongsToMany(Event::class);
     }
+
+    public function checkifAssignedToEvent(Event $event)
+    {
+        $numeberOfAssignedEvents = $this->events()
+                    ->where('events.id', $event->id)
+                    ->count();
+        return $numeberOfAssignedEvents > 0 ? true : false; 
+    }
+    
 }

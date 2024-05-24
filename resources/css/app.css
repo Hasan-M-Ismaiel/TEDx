@@ -2567,12 +2567,12 @@ body {background: #eeeae9;}
   animation: animate-positive 1s;
 }
 .progress .progress-value{
-  width: 40px;
+  width: 25px;
   height: 35px;
   line-height: 27px;
   border-radius: 20px;
   background: #fff;
-  font-size: 10px;
+  font-size: 7px;
   font-weight: 600;
   position: absolute;
   top: -11px;

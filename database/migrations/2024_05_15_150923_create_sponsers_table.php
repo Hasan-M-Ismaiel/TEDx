@@ -14,21 +14,16 @@ return new class extends Migration
         Schema::create('sponsers', function (Blueprint $table) {
             $table->id();
 
-            //this should be deleted because we will use many-to-many relationship
-            // $table->foreignId('event_id')->constrained()->onDelete('cascade');
-
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
             $table->string('about');
             $table->string('phone_number');
             
-            $table->string('logo');
-
-            $table->string('facebook_account')->nullable();
-            $table->string('twitter_account')->nullable();
-            $table->string('instagram_account')->nullable();
-            $table->string('linkedin_account')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedin')->nullable();
 
             $table->string('website')->nullable();
 

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SpeakerCreateRequest;
+use App\Http\Requests\SpeakerUpdateRequest;
 use App\Models\Event;
 use App\Models\Speaker;
+use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 
 class SpeakerController extends Controller
@@ -40,9 +43,24 @@ class SpeakerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SpeakerCreateRequest $request)
     {
-        //
+        $speaker = Speaker::create($request->validated());
+
+        $event = Event::findOrFail(request()->event_id);
+        $event->speakers()->attach($speaker);
+
+        //image to the event
+        $temporaryFile = TemporaryFile::where('folder', request()->image)->first();
+        if ($temporaryFile) {
+            $speaker->addMedia(storage_path('app/pictures/tmp/' . $temporaryFile->folder . '/' . $temporaryFile->filename))
+                ->toMediaCollection('speakers');
+
+            rmdir(storage_path('app/pictures/tmp/' . $temporaryFile->folder));
+            $temporaryFile->delete();
+        }
+        
+        return redirect()->route('admin.speakerCreated', ['speaker'=>$speaker]);
     }
 
     /**
@@ -75,16 +93,36 @@ class SpeakerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SpeakerUpdateRequest $request, Speaker $speaker)
     {
-        //
+        $speaker->update($request->validated());
+
+        //updat image
+        if(request()->image){
+            $speaker->clearMediaCollection('speakers'); 
+            $temporaryFile = TemporaryFile::where('folder', request()->image)->first();
+            if ($temporaryFile) {
+                $speaker->addMedia(storage_path('app/pictures/tmp/' . $temporaryFile->folder . '/' . $temporaryFile->filename))
+                    ->toMediaCollection('speakers');
+    
+                rmdir(storage_path('app/pictures/tmp/' . $temporaryFile->folder));
+                $temporaryFile->delete();
+            }
+        }
+
+        return redirect()->route('admin.speakerUpdated', ['speaker'=>$speaker]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Speaker $speaker)
     {
-        //
+        if($speaker->events()->count()>0){
+            $speaker->events()->detach();
+        }
+        $oldSpeaker = $speaker->first_name;
+        $speaker->delete();
+        return redirect()->route('admin.speakerDeleted', ['speaker'=>$oldSpeaker]);
     }
 }
