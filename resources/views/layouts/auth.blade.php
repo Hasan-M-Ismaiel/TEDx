@@ -10,7 +10,7 @@
     <meta name="author" content="eng.Hasan Ismaiel">
     <meta name="keyword" content="TED,TEDx,TEDxJumeirahBeachPark,Jumeirah,Beach,Park,conference">
     <title>{{ config('app.name') }}</title>
-    <link rel="icon" type="image/png" href="{!! asset('assets/icons/tedxIcon.png') !!}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets_main/assets/icons/TED.png') }}" />
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
